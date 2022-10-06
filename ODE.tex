@@ -1,0 +1,270 @@
+\documentclass[12pt]{scrartcl}
+\title{Moment of Inertia}
+\nonstopmode
+\usepackage{graphicx}			% Required for including pictures
+\usepackage[figurename=Figure]{caption}
+\usepackage{float}    				% For tables and other floats
+\usepackage{amsmath}  			% For math
+\usepackage{bbm}  				% For mathBBM
+\usepackage{amssymb}  			% For more math
+\usepackage{fullpage} 			% Set margins and place page numbers at bottom center
+\usepackage{paralist} 			% paragraph spacing
+\usepackage{listings} 			% For source code
+\usepackage{enumitem} 			% useful for itemization
+\usepackage{siunitx}  			% standardization of si units
+\usepackage{tikz,bm} 			% Useful for drawing plots
+\usepackage{fancyhdr}
+\usepackage{setspace}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage{bm}
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=1.2pt] (char) {#1};}}
+
+\usepackage{amsthm}
+\usepackage[framemethod=TikZ]{mdframed}
+
+\parindent=23pt
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Form
+\newcounter{form}[section]\setcounter{form}{0}
+\newenvironment{form}[2][]{%
+\refstepcounter{form}%
+\ifstrempty{#1}%
+{\mdfsetup{%
+frametitle={%
+\tikz[baseline=(current bounding box.east),outer sep=0pt]
+\node[anchor=east,rectangle,fill=violet!40]
+{\strut \textit{Form}};}}
+}{}%
+\mdfsetup{innertopmargin=5pt,linecolor=violet!25,%
+linewidth=1.5pt,topline=true,%
+frametitleaboveskip=\dimexpr-\ht\strutbox\relax
+}
+\begin{mdframed}[]\relax%
+\label{#2}}{\end{mdframed}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Solution
+\newcounter{sol}[section]\setcounter{prf}{0}
+\newenvironment{sol}[2][]{%
+\refstepcounter{sol}%
+\ifstrempty{#1}%
+{\mdfsetup{%
+frametitle={%
+\tikz[baseline=(current bounding box.east),outer sep=0pt]
+\node[anchor=east,rectangle,fill=red!20]
+{\strut \textit{Solution}};}}
+}{}%
+\mdfsetup{innertopmargin=5pt,linecolor=red!25,%
+linewidth=1.5pt,topline=true,%
+frametitleaboveskip=\dimexpr-\ht\strutbox\relax
+}
+\begin{mdframed}[]\relax%
+\label{#2}}{\end{mdframed}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Example
+\newcounter{egs}[section]\setcounter{egs}{0}
+\newenvironment{egs}[2][]{%
+\refstepcounter{egs}%
+\ifstrempty{#1}%
+{\mdfsetup{%
+frametitle={%
+\tikz[baseline=(current bounding box.east),outer sep=0pt]
+\node[anchor=east,rectangle,fill=purple!30]
+{\strut \textit{Example}};}}
+}{}%
+\mdfsetup{innertopmargin=5pt,linecolor=purple!25,%
+linewidth=1.5pt,topline=true,%
+frametitleaboveskip=\dimexpr-\ht\strutbox\relax
+}
+\begin{mdframed}[]\relax%
+\label{#2}}{\end{mdframed}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=violet,
+    urlcolor=violet,
+}
+
+
+\setstretch{1.2}
+
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand\footrule{\hrule height1pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lfoot{Ordinary Differential Equation \raisebox{0.5\depth}{\scalebox{0.8}\textcopyright}~BinaryPhi}
+\rfoot{Page \thepage}
+
+\begin{document}
+
+	\begin{center}
+		\textbf{ \large Ordinary Differential Equation \raisebox{0.5\depth}{\scalebox{0.8}\textcopyright}~BinaryPhi}
+	\end{center}
+	\vspace{-0.3em}
+	\noindent\textbf{Author:} Kami Mou, Jinwei Zou
+	\hspace{\fill}  \textbf{Last Edit:} \today~PDT \vspace{-0.6em} \\
+	\hrule
+
+\vspace{3em}
+
+%%%%%%%%%%%%%%%%TOC
+\hyperlink{Sec. 1}{\fontfamily{lmss}\selectfont
+	\hspace{-20pt} \textbf{\textcolor{red}{Sec. 1:} Separable Differential Equations (Solution and 2 Examples)}
+}\\
+
+\hyperlink{Sec. 2}{\fontfamily{lmss}\selectfont
+	\hspace{-20pt} \textbf{\textcolor{red}{Sec. 2:} Homogeneous Equations (Solution and 1 Example)}
+}\\
+
+
+\newpage
+%%%%%%%%%%%%%%%%1
+%%%%%%%%%%%%%%%%Separable Differential Equations
+%%%%%%%%%%%%%%%%1
+\hypertarget{Sec. 1}{\fontfamily{lmss}\selectfont
+	\noindent \textbf{\textcolor{red}{Sec. 1:} Separable Differential Equations} \label{Sec. 1}
+}
+\vspace{1em}	
+
+\begin{form}{}
+\vspace{-1em}			%DoNotDelete/ChangeWhenNecessary
+\addtolength{\jot}{0.4em}	%DoNotDelete
+%
+\begin{equation}
+\frac{dy}{dx}=f(x)g(y)\,.
+\end{equation}
+%
+\vspace{-1em}				%DoNotDelete/ChangeWhenNecessary
+\end{form}
+
+\begin{sol}{}
+\vspace{-1.5em}			%DoNotDelete/ChangeWhenNecessary
+\addtolength{\jot}{0.4em}		%DoNotDelete
+\paragraph{\textcolor{blue}{\textbf{1)}}}
+%%%%%
+%%%%%%%%%%%Indentation
+\parshape
+2
+0pt \linewidth
+1\parindent \dimexpr \linewidth-1\parindent
+%%%%%%%%%%%Indentation
+%%%%%
+When $g(y) &\neq 0$,
+%
+\begin{align*}
+\frac{dy}{g(y)}&=f(x)dx\,,\\
+\int \frac{dy}{g(y)}&= \int f(x)dx + C\,.
+\end{align*}
+%
+
+This is the \textcolor{blue}{General Solution} to this type of differential equations.
+
+\paragraph{\textcolor{blue}{\textbf{2)}}}
+\parshape
+2
+0pt \linewidth
+\parindent \dimexpr \linewidth-\parindent
+When $g(y) &= 0$, of all functions of $y$, if exists $y_0$, as a constant, such that 
+
+$g(y)=g(y_0)=0,$ where $y_0$ has the property that 
+
+$$\frac{dy}{dx}=0.$$
+
+\vspace{0.5em}We can say that $y=y_0$ is also one of the solutions to the differential equation.
+\vspace{0.5em}
+\end{sol}
+
+\newpage
+\begin{egs}{1}
+\vspace{-1em}			%DoNotDelete/ChangeWhenNecessary
+\addtolength{\jot}{0.4em}	%DoNotDelete
+%
+\begin{equation*}
+\text{tan}(x)\,\frac{dy}{dx}=1+y\,.
+\end{equation*}
+%
+\vspace{-2em}			%DoNotDelete/ChangeWhenNecessary
+\paragraph{\textcolor{blue}{\textbf{[Solution]}}}
+\parshape
+2
+0pt \linewidth
+2.85\parindent \dimexpr \linewidth-2.85\parindent
+First, make this equation neat:
+$$\frac{dy}{dx}=\frac{1}{\text{tan}(x)}\,(1+y)\,,$$
+which is the form of the separable differential equation.\\
+Then assume the function of $y$ to be not equal to $0$:
+%
+\begin{align*} % asterisk *
+\frac{1}{1+y}\,dy&=\frac{1}{\text{tan}(x)}\,dx\,,\\ % ampersand &
+\frac{1}{1+y}\,dy&=\frac{\text{cos}(x)}{\text{sin}(x)}\,dx\,,\\
+\frac{1}{1+y}\,dy&=\frac{1}{\text{sin}(x)}\,d\left(\text{sin}(x)\right),\\
+\int \frac{1}{1+y}\,dy&=\int \frac{1}{\text{sin}(x)}\,d\left(\text{sin}(x)\right)+\textcolor{red}{c}\,,\\
+\text{ln}\left|1+y\right| &= \text{ln}\left|\text{sin}(x)\right|+\textcolor{red}{c}\,\vphantom{\frac{1}{1}}\\
+&=\text{ln}\left|e^{\textcolor{red}{c}}\cdot\text{sin}(x)\right|,\vphantom{\frac{1}{1}}\\
+\left|1+y\right| &= \left|e^{\textcolor{red}{c}}\cdot\text{sin}(x)\right|, \vphantom{\frac{1}{1}}\\
+1+y &= \pm\, e^{\textcolor{red}{c}}\cdot\text{sin}(x),C := \pm\, e^{\textcolor{red}{c}} \vphantom{\frac{1}{1}}\\
+y &= C\cdot\text{sin}(x)-1\,, \vphantom{\frac{1}{1}}
+\end{align*}
+%
+where $C$ is not equal to $0$. Now, consider function $1+y$ to be equal to $0$:
+$$1+y=0 \Longrightarrow y=-1\,.$$
+$y=-1$ is, in fact, a solution to this equation that tan$(x)\,0=0.$ In addition, the assumption of $y=-1$ matches the circumstance when $C=0$.\\
+Therefore, the \textcolor{blue}{general solution} of this differential equation is \vspace{-0.5em}
+$$\Aboxed{y = C\cdot\text{sin}(x)-1, \forall C \in \mathbb{R}\,.}$$
+\vspace{-21pt}
+\end{egs}
+
+\newpage
+\begin{egs}{2}
+\vspace{-1em}			%DoNotDelete/ChangeWhenNecessary
+\addtolength{\jot}{0.4em}	%DoNotDelete
+%
+\begin{equation*}
+dx+xydy=y^2dx+ydy\,.
+\end{equation*}
+%
+\vspace{-2em}			%DoNotDelete/ChangeWhenNecessary
+\paragraph{\textcolor{blue}{\textbf{[Solution]}}}
+\parshape
+2
+0pt \linewidth
+2.85\parindent \dimexpr \linewidth-2.85\parindent
+First, make this equation neat:
+
+\end{egs}
+
+%\Aboxed{&AnswersHere}\\
+
+\newpage
+%%%%%%%%%%%%%%%%2
+%%%%%%%%%%%%%%%%Homogeneous Equations
+%%%%%%%%%%%%%%%%2
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
