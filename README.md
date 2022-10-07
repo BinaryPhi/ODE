@@ -1,10 +1,15 @@
 # ODE
 Ordinary Differential Equations
 
+## [PDF@GitHub](https://github.com/)
+
+## [PDF@BinaryPhi.site](https://binaryphi.site/)
+
+## [TeX@GitHub](https://github.com/)
 
 ## License
 ```
-Copyright (C) 2022 DSAERF-CALMIT
+Copyright (c) 2022 BinaryPhi Club
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
